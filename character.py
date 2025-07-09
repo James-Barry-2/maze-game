@@ -53,26 +53,28 @@ class Character:
         self.level = new_level
     def set_positoin(self, new_position):
         self.position = new_position
-    def set_defence(self, amount):
-        self.defence = self.defence + amount
+    def set_defence(self, new_defence):
+        self.defence = new_defence
+        print(f"Defence set to {self.defence}")
     def set_strength(self, amount):
         self.strength = amount
     def set_weapon(self, weapon):
         self.weapon = weapon
+        print(f"Weapon set to {self.weapon}")
         if weapon == 'sword':
-            self.set_attack_power(self, 10)
+            self.set_attack_power(10)
         elif weapon == 'club':
-            self.set_attack_power(self, 6)
+            self.set_attack_power(6)
         elif weapon == 'longbow':
-            self.set_attack_power(self, 8)
+            self.set_attack_power(8)
         elif weapon == 'dagger':
-            self.set_attack_power(self, 4)
+            self.set_attack_power(4)
         elif weapon == 'staff':
-            self.set_attack_power(self, 8)
+            self.set_attack_power(8)
         elif weapon == 'greatsword':
-            self.set_attack_power(self, 12)
+            self.set_attack_power(12)
         elif weapon == 'excalibur':
-            self.set_attack_power(self, 16)
+            self.set_attack_power(16)
     def set_dexerity(self, amount):
         self.dexerity = amount
     def set_attack_power(self, new_attack_power):
@@ -81,15 +83,19 @@ class Character:
     # Custom Functions
     def add_inventory(self, item):
         self.inventory.append(item)
+        print(f"{item} added to inventory.")
     def remove_inventory(self, item):
-        if item in self.inventory:
-            self.inventory.remove(item)
-        else:
-            print(f"ERROR: {item} not found in inventory.")
+        for inventory_item in self.inventory:
+            if inventory_item.lower() == item.lower():
+                self.inventory.remove(inventory_item)
+                print(f"{inventory_item} removed from inventory.")
+                return
+        print(f"ERROR: {item} not found in inventory.")
     def heal(self, amount):
         self.health =+ amount
         if self.health > self.max_health:
             self.health = self.max_health
+        print(f"{self.name} healed for {amount} health. Current health: {self.health}/{self.max_health}")
     
 
     def status(self):

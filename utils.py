@@ -8,7 +8,7 @@ items = ["Healing Potion", "Greater Healing Potion", "Old Gloves", "Goblet",
 
 def trigger_encounter(character):
     print("You encountered something")
-    random_item = random.sample(items, 1)
+    random_item = random.sample(items, 1)[0]
     print(random_item)
     character.add_inventory(random_item)
 
@@ -76,7 +76,7 @@ def use_an_item(character):
             character.heal(50)
             character.remove_inventory("Greater Healing Potion")
         elif chosen_item == "shield":
-            character.set_defence(2)
+            character.set_defence(character.get_defence() + 2)
             character.remove_inventory("Shield")
         elif chosen_item == "sword":
             print("You equip a sword")
@@ -85,7 +85,7 @@ def use_an_item(character):
             print("You equip a greatsword")
             character.set_weapon("greatsword")
         elif chosen_item == "excalibur":
-            print("You equip the legendary excalibur!")
+            print("You equip the legendary Excalibur!")
             character.set_weapon("excalibur")
         elif chosen_item == "longbow":
             print("You equip a longbow")
@@ -105,9 +105,7 @@ def attack(character, enemy):
 
     attack_power = character.get_attack_power()
 
-    # Determine critical hit chance
     critical_hit_chance = attack_power * 0.2
-    # Does Crit happen?
     roll = random.randint(0, 100)
     if roll <= critical_hit_chance:
         crit_multiplier = 2
